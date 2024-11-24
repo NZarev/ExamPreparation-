@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class ExamPreparation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int badGradesLimit = Integer.parseInt(scanner.nextLine());
+        int badGradesCount = 0;
+        int totalGradesCount = 0;
+        double gradesSum = 0.0;
+        String lastProblem = "";
+        
+        while (true) {
+            String problemName = scanner.nextLine();
+            if (problemName.equals("Enough")) {
+                break;
+            }
+            
+            int grade = Integer.parseInt(scanner.nextLine());
+            totalGradesCount++;
+            gradesSum += grade;
+            
+            if (grade <= 4) {
+                badGradesCount++;
+                if (badGradesCount == badGradesLimit) {
+                    System.out.printf("You need a break, %d poor grades.%n", badGradesCount);
+                    return;
+                }
+            }
+            lastProblem = problemName;
+        }
+        
+        System.out.printf("Average score: %.2f%n", gradesSum / totalGradesCount);
+        System.out.printf("Number of problems: %d%n", totalGradesCount);
+        System.out.printf("Last problem: %s%n", lastProblem);
+    }
+}
